@@ -1,9 +1,8 @@
 package com.rolon.kafka.tutorial1;
 
-import org.apache.kafka.clients.KafkaClient;
 import org.apache.kafka.clients.producer.KafkaProducer;
-import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.clients.producer.ProducerConfig;
+import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.serialization.StringSerializer;
 
 import java.util.Properties;
@@ -11,7 +10,7 @@ import java.util.Properties;
 public class ProducerDemo {
 
     public static void main(String[] args) {
-        String bootstrapServer="127:0.0.1:9092";
+        String bootstrapServer="127.0.0.1:9092";
         // Create producer properties
         Properties properties = new Properties();
         properties.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServer);
@@ -20,7 +19,18 @@ public class ProducerDemo {
 
         // Create the producer
         KafkaProducer<String, String> producer = new KafkaProducer<String, String>(properties);
-        
-        // send data
+
+        //Create a procucer recotd
+        ProducerRecord<String, String> record =
+                new ProducerRecord<String, String>("first_topic", "Hello world");
+
+        // send data - asynchronous
+        producer.send(record);
+
+        //flush data
+        producer.flush();
+
+        //flush and close producer
+        producer.close();
     }
 }
