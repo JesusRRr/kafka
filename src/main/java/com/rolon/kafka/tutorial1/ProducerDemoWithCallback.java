@@ -30,10 +30,10 @@ public class ProducerDemoWithCallback {
                 //executes every time a record is successfully or and exception  is thrown
                 if(e == null) {
                     //the record was successfully sent
-                    logger.info("Received new metadata. \n"+
+                    logger.info("\nReceived new metadata. \n"+
                     "Topic:"+ recordMetadata.topic() + "\n"+
                     "Partition:" + recordMetadata.partition() +"\n" +
-                    "Offset:" + recordMetadata.offset() +
+                    "Offset:" + recordMetadata.offset() + "\n"+
                     "Timestamp" + recordMetadata.timestamp());
                 }else{
                     logger.error("Error while producing", e);
